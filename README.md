@@ -4,6 +4,7 @@
 # 使い方
 ~~~
 git clone https://github.com/namikis/word-translator.git
+cd word-translator
 python translator.py
 ~~~
 
