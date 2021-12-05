@@ -17,8 +17,8 @@ while(1):
 
         print(" mean : " + text[0] + "\n")
     except IndexError:
-        print("\n該当する単語がありません。\n")
+        print(" 該当する単語がありません。\n")
     except KeyboardInterrupt:
-        print("\n終了します。\n")
+        print("\n 終了します。\n")
         exit()
 
