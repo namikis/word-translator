@@ -12,7 +12,7 @@ while(1):
         url = weblio + query
 
         html = requests.get(url, headers=headers).text
-        reg = "content-explanation.+?>(.+?)<"
+        reg = "content-explanation.+?>\n(.+?)<"
         text = re.findall(reg, html)
 
         print(" mean : " + text[0] + "\n")
