@@ -1,23 +1,42 @@
 import requests
 import re
+from translate import Translator
 
 headers = {
     'User-Agent' : 'saito/1.0(hidesakai6@gmail.com)'
 }
 
 weblio = "https://ejje.weblio.jp/content/"
+
+def getScraping(service, query):
+    if(service == "weblio"):
+        url = weblio + query
+        reg = "content-explanation.+?>\n(.+?)<"
+
+    html = requests.get(url, headers=headers).text
+    textList = re.findall(reg, html)
+
+    try:
+        text = textList[0]
+    except IndexError:
+        text = ""
+    return text
+
+def getGoogleTranslator(query):
+    translator = Translator(from_lang="en", to_lang="ja")
+    return translator.translate(query)
+
 while(1):
     try:
         query = input(" word : ")
-        url = weblio + query
+        weblioText = getScraping("weblio", query)
 
-        html = requests.get(url, headers=headers).text
-        reg = "content-explanation.+?>\n(.+?)<"
-        text = re.findall(reg, html)
-
-        print(" mean : \n" + text[0].strip() + "\n")
-    except IndexError:
-        print(" 該当する単語がありません。\n")
+        if(weblioText == ""):
+            googleText = getGoogleTranslator(query)
+            print(" google : " + googleText + "\n")
+        else:
+            print(" weblio : " + weblioText.strip() + "\n ")
+        
     except KeyboardInterrupt:
         print("\n 終了します。\n")
         exit()
