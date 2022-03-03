@@ -15,7 +15,7 @@ while(1):
         reg = "content-explanation.+?>\n(.+?)<"
         text = re.findall(reg, html)
 
-        print(" mean : " + text[0] + "\n")
+        print(" mean : \n" + text[0].strip() + "\n")
     except IndexError:
         print(" 該当する単語がありません。\n")
     except KeyboardInterrupt:
