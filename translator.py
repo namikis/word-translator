@@ -32,8 +32,10 @@ while(1):
         weblioText = getScraping("weblio", query)
 
         if(weblioText == ""):
-            googleText = getGoogleTranslator(query)
-            print(" google : " + googleText + "\n")
+            answer = input('weblioから回答が得られませんでした。Google翻訳（回数制限あり）から取得しますか？（y/n）')
+            if(answer == 'y'):
+                googleText = getGoogleTranslator(query)
+                print(" google : " + googleText + "\n")
         else:
             print(" weblio : " + weblioText.strip() + "\n ")
         
